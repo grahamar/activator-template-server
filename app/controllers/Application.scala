@@ -6,7 +6,7 @@ import play.api.Logger
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import sbt.IO
+import sbt.{Path, IO}
 
 import util.{Settings, LoggedAction, GitUtils}
 import activator._
@@ -54,7 +54,10 @@ object Application extends Controller {
   }
 
   def templateFile(firstBit: String, secondBit: String, templateName: String) = LoggedAction { request =>
-    ???
+    Ok.sendFile(
+      content = Path(Settings.BaseFile) / s"templates/$firstBit/$secondBit/$templateName",
+      inline = true
+    )
   }
 
   def currentIndexFile = LoggedAction {
