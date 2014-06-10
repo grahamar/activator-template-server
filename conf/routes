@@ -1,0 +1,17 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                                                                                               controllers.Application.index
+
+POST    /template                                                                                                       controllers.Application.template
+
+GET     /templates/:firstBit/:secondBit/:id/:activatorVersion/:templateName                                             controllers.Application.templateBundle(firstBit, secondBit, id, activatorVersion, templateName)
+GET     /templates/:firstBit/:secondBit/$templateName<.*\.zip>                                                          controllers.Application.templateFile(firstBit, secondBit, templateName: String)
+
+GET     /index/v2/current.properties                                                                                    controllers.Application.currentIndexFile
+GET     /index/v2/$indexFile<index-.*\.zip>                                                                             controllers.Application.indexFile(indexFile: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                                                                                                   controllers.Assets.at(path="/public", file)
